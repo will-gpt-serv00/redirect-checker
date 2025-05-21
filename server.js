@@ -8,10 +8,10 @@ const FALLBACK_URL = "https://win4web.dpdns.org/index2.html";
 
 app.get("/", async (req, res) => {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 7000);
+  const timeout = setTimeout(() => controller.abort(), 4000);
 
   try {
-    const response = await fetch(TARGET_URL, { method: "GET", signal: controller.signal });
+    const response = await fetch(TARGET_URL, { method: "HEAD", signal: controller.signal });
     clearTimeout(timeout);
     if (response.ok) {
       return res.redirect(TARGET_URL);

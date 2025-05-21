@@ -8,8 +8,12 @@ const FALLBACK_URL = "https://win4web.dpdns.org/index2.html";
 
 app.get("/", async (req, res) => {
   try {
-    const response = await fetch(TARGET_URL, { method: "HEAD", timeout: 4000 });
-    if (response.ok) {
+    const response = await fetch(TARGET_URL, {
+      method: "GET",
+      headers: { "User-Agent": "Mozilla/5.0" }, // mimic a real browser
+      timeout: 5000,
+    });
+    if (response.status >= 200 && response.status < 400) {
       return res.redirect(TARGET_URL);
     }
     res.redirect(FALLBACK_URL);

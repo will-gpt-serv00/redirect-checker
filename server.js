@@ -13,12 +13,13 @@ app.get("/", async (req, res) => {
   try {
     const response = await fetch(TARGET_URL, { method: "HEAD", signal: controller.signal });
     clearTimeout(timeout);
+
     if (response.ok) {
       return res.redirect(TARGET_URL);
     }
-    res.redirect(FALLBACK_URL);
+    return res.redirect(FALLBACK_URL);
   } catch (err) {
-    res.redirect(FALLBACK_URL);
+    return res.redirect(FALLBACK_URL);
   }
 });
 
